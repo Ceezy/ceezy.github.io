@@ -76,6 +76,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="Ceezy's blog" type="application/atom+xml" />
 
@@ -89,13 +91,16 @@
 
 
 
+<meta name="description" content="Hi, everyone! After a period of interview, I found that most of the interviewee, with two or three years’ working experience, don’t even know much about property’s attributes.  Therefore, it is necess">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objective-C property attributes">
 <meta property="og:url" content="http://yoursite.com/2017/03/19/Objective-C-property-attributes/index.html">
 <meta property="og:site_name" content="Ceezy's blog">
-<meta property="og:updated_time" content="2017-03-19T09:59:01.000Z">
+<meta property="og:description" content="Hi, everyone! After a period of interview, I found that most of the interviewee, with two or three years’ working experience, don’t even know much about property’s attributes.  Therefore, it is necess">
+<meta property="og:updated_time" content="2017-03-19T15:24:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C property attributes">
+<meta name="twitter:description" content="Hi, everyone! After a period of interview, I found that most of the interviewee, with two or three years’ working experience, don’t even know much about property’s attributes.  Therefore, it is necess">
 
 
 
@@ -320,7 +325,32 @@
       
 
       
-        
+        <p>Hi, everyone! After a period of interview, I found that most of the interviewee, with two or three years’ working experience, don’t even know much about property’s attributes.  Therefore, it is necessary to tell you the detail about property’s attributes. </p>
+<h2 id="Atomicity"><a href="#Atomicity" class="headerlink" title="Atomicity"></a>Atomicity</h2><p><strong>atomic</strong> and <strong>nonatomic</strong> describe the atomicity for an Objective-C property.</p>
+<p><strong>atomic</strong> is the default attribute for atomicity. If you don’t type the atomicity attribute, the complier will automatically generate <strong>atomic</strong> for you. <strong>atomic</strong> guaranteed that if you try to read the value of the property, it will return a valid value, not a junk memory.  </p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<ul>
+<li><strong>atomic</strong> does not guaranteed thread safety. In other words, if you have two thread to manage the value of an atomic property, once you read from it, you don’t know which value will be returned, the value before change or the value after change. </li>
+<li><strong>atomic</strong> will cause more memory consumption than <strong>nonatomic</strong>.</li>
+</ul>
+</blockquote>
+<p>On the flip side, <strong>nonatomic</strong> does not guaranteed the value’s validity. It may return a junk memory which will cause a crash.</p>
+<p>Generally speaking, it is recommended to use <strong>nonatomic</strong> rather than <strong>atomic</strong> and you need to guaranteed thread safety using thread locks.</p>
+<h2 id="Access"><a href="#Access" class="headerlink" title="Access"></a>Access</h2><p><strong>readwrite</strong> and <strong>readonly</strong> describe the accessibility of the property. </p>
+<p>Apparently, <strong>readwrite</strong> is the default attribute, which allows anyone the write and read this property. </p>
+<p>Oppositely, anyone else can only read this property when you use <strong>readonly</strong>.</p>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>In MRC, <strong>assign</strong>, <strong>retain</strong> and <strong>copy</strong> describe how the property storage its value.</p>
+<p><strong>assign</strong> is used for primitives (i.e. int, float, double, bool or enum).</p>
+<p><strong>retain</strong> is used for the pointer type property. It will hold the reference to the object and make the object’s reference count plus one.</p>
+<p><strong>copy</strong> is used for those classed conform to the NSCopying protocol (i.e. NSString, NSDictionary, NSData, etc.). If you set a property with <strong>copy</strong>, it will alloc a memory and point to the content when you initializing the property with an object. So the copied property would not be changed when the object changes.</p>
+<p>As we all known, ARC brought another two attributes, <strong>strong</strong> and <strong>weak</strong>.</p>
+<p><strong>strong</strong> is the same as <strong>retain</strong>. The only difference is <strong>strong</strong> is used in ARC and <strong>retain</strong> is for MRC.</p>
+<p><strong>weak</strong> will reference the object but will not keep the reference. When the object release, <strong>weak</strong> property will be automatically set to nil, which makes your code safer.</p>
+<h2 id="Setter-and-getter"><a href="#Setter-and-getter" class="headerlink" title="Setter and getter"></a>Setter and getter</h2><p>Additionally, Objective-C provides a convenient way for readability and writability for a property. You can use <strong>setter=</strong> and <strong>getter=</strong> append a custom method name to assign a specific method as the property’s setter or getter. For example, </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign, getter=isCounting) BOOL counting;</div></pre></td></tr></table></figure>
+<p>So we can invoke the method “isCounting” to get the value of the property “counting”.</p>
+
       
     </div>
 
@@ -411,8 +441,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -474,6 +513,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomicity"><span class="nav-number">1.</span> <span class="nav-text">Atomicity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Access"><span class="nav-number">2.</span> <span class="nav-text">Access</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storage"><span class="nav-number">3.</span> <span class="nav-text">Storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setter-and-getter"><span class="nav-number">4.</span> <span class="nav-text">Setter and getter</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
