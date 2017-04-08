@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Ceezy&#39;s blog</title>
   
-  <link href="/zh-cn/atom.xml" rel="self"/>
+  <link href="/zh-Hans/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
   <updated>2017-04-08T16:28:39.000Z</updated>
