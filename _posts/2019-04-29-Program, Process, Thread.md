@@ -1,8 +1,5 @@
 ---
 title: "程序，进程，线程"
-toc: true
-toc_sticky: true
-toc_label: "目录"
 categories:
   - Operating System
 tags:

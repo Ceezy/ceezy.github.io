@@ -298,3 +298,9 @@ defaults:
       comments: true
       share: true
       related: true
+      toc: true
+      toc_sticky: true
+      header:
+        overlay_image: /assets/images/post_default_header.jpg
+        overlay_filter: rgba(0, 0, 0, 0.25)
+        show_overlay_excerpt: false	

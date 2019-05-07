@@ -1,8 +1,5 @@
 ---
 title: "Objective-C 里的栈和堆"
-toc: true
-toc_sticky: true
-toc_label: "目录"
 categories:
   - iOS
 tags:
