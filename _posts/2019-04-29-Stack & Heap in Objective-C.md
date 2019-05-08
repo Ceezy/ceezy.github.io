@@ -18,7 +18,7 @@ tags:
 
 ![](/assets/images/stack-and-heap-in-objective-c/15565177982518.jpg)
 
-上图 Stack 位于高位地址，text 位于地位地址。
+上图 stack 位于高位地址，text 位于低位地址。
 
 * **Text**：文本区，也称代码区（Code Segment），存放着可执行指令。这个区域的数据一般是只读的。
 * **Data**：数据区，也称初始化数据区，存放着一些已经初始化了的静态变量，全局变量或者一些文字常量等。
